@@ -27,5 +27,3 @@ This repository contains a simple Node.js API and a React client used for a user
    ```
 
 5. Open `http://localhost:3000` in your browser to use the application.
-
-
