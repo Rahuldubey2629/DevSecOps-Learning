@@ -25,6 +25,7 @@ jobs:
         working-directory: client
         run: npm ci
       - name: Build
+        working-directory: client
         run: npm run build
 
   test:  
@@ -41,6 +42,7 @@ jobs:
         working-directory: client
         run: npm ci
       - name: Test
+        working-directory: client
         run: npm run test     
   
   deploy:
