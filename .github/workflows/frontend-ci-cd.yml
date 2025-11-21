@@ -5,8 +5,8 @@ on:
     branches:
       - main
       - local-dev
-    paths:
-      - "client/**"
+    # paths:
+    #   - "client/**"
       
   workflow_dispatch:
 
