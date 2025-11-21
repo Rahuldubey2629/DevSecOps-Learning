@@ -24,6 +24,24 @@ jobs:
       - name: Install dependencies
         working-directory: client
         run: npm ci
+      - name: Build
+        run: npm run build
+
+  test:  
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: code checkout
+        uses: actions/checkout@v5
+      - name: Node initialization
+        uses: actions/setup-node@v6
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        working-directory: client
+        run: npm ci
+      - name: Test
+        run: npm run test     
   
   deploy:
     runs-on: ubuntu-latest  

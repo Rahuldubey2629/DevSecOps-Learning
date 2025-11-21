@@ -7,7 +7,6 @@ on:
       - local-dev
     paths:
       - "api/**"
-      
   workflow_dispatch:
 
 jobs:
@@ -22,7 +21,22 @@ jobs:
       - name: Intall dependencies
         working-directory: api
         run: npm install
-  
+      - name: Build
+        run: npm run build
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: code checkout
+        uses: actions/checkout@v5
+      - name: Node initialization
+        uses: actions/setup-node@v6
+      - name: Intall dependencies
+        working-directory: api
+        run: npm install
+      - name: Test
+        run: npm run test
+
   deploy:
     runs-on: ubuntu-latest  
 
