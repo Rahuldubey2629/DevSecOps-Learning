@@ -5,10 +5,10 @@ on:
     branches:
       - main
       - local-dev
-#     paths:
-#       - "client/**"
+    paths:
+      - "api/**"
       
-# workflow_dispatch:
+workflow_dispatch:
 
 jobs:
   build:  
@@ -20,7 +20,7 @@ jobs:
       - name: Node initialization
         uses: actions/setup-node@v6
       - name: Intall dependencies
-        working-directory: client
+        working-directory: api
         run: npm install
   
   deploy:
