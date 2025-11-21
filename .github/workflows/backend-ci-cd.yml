@@ -1,4 +1,4 @@
-name: CI for frontend
+name: CI for Backend
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
     paths:
       - "api/**"
       
-workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   build:  
