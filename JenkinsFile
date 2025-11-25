@@ -65,7 +65,7 @@ pipeline {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred') {
                         dir("api"){
-                            sh "docker push rahuldubey1/devsecops-backend:latest "
+                            sh "docker build -t rahuldubey1/devsecops-backend:latest . "
                             sh "trivy image --format table -o backend-scan-report.html rahuldubey1/devsecops-backend:latest"
                             sh "docker push rahuldubey1/devsecops-backend:latest "
                         }
@@ -74,7 +74,7 @@ pipeline {
             }
         }
         
-         stage('Fromt Build-Tag && Push Docker Image') {
+         stage('Frontend Build-Tag && Push Docker Image') {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred') {
