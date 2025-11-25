@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'dev', url: 'https://github.com/Rahuldubey2629/DevSecOps-Learning.git'
+                git branch: 'docker-build-deploy', url: 'https://github.com/Rahuldubey2629/DevSecOps-Learning.git'
             }
         }
         
@@ -65,9 +65,9 @@ pipeline {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred') {
                         dir("api"){
-                        sh "docker push rahuldubey1/devsecops-backend:latest "
-                        sh "trivy image --format table -o backend-scan-report.html rahuldubey1/devsecops-backend:latest"
-                        sh "docker push rahuldubey1/devsecops-backend:latest "
+                            sh "docker push rahuldubey1/devsecops-backend:latest "
+                            sh "trivy image --format table -o backend-scan-report.html rahuldubey1/devsecops-backend:latest"
+                            sh "docker push rahuldubey1/devsecops-backend:latest "
                         }
                     }
                 }
