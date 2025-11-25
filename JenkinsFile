@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'docker-build-deploy', url: 'https://github.com/Rahuldubey2629/DevSecOps-Learning.git'
+                git branch: 'dev', url: 'https://github.com/Rahuldubey2629/DevSecOps-Learning.git'
             }
         }
         
@@ -60,11 +60,40 @@ pipeline {
                 sh 'trivy fs --format table -o fs-report.html .'
             }
         }
-         stage('Hello') {
+         stage('Backend Build-Tag && Push Docker Image') {
             steps {
-                echo 'Hello World'
+                script {
+                    withDockerRegistry(credentialsId: 'docker-cred') {
+                        dir("api"){
+                        sh "docker push rahuldubey1/devsecops-backend:latest "
+                        sh "trivy image --format table -o backend-scan-report.html rahuldubey1/devsecops-backend:latest"
+                        sh "docker push rahuldubey1/devsecops-backend:latest "
+                        }
+                    }
+                }
             }
         }
-         
+        
+         stage('Fromt Build-Tag && Push Docker Image') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-cred') {
+                        dir("client"){
+                            sh "docker build -t rahuldubey1/devsecops-frontend:latest ."
+                            sh "trivy image --format table -o frontend-scan-report.html rahuldubey1/devsecops-frontend:latest"
+                            sh "docker push rahuldubey1/devsecops-frontend:latest "
+                        }
+                    }
+                }
+            }
+        }
+        
+         stage('Docker Deploy via compose') {
+            steps {
+                script {
+                    sh "docker-compose up -d"
+                }
+            }
+        }
     }
 }

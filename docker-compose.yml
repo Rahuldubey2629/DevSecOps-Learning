@@ -12,7 +12,28 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
       - ./mysql-init:/docker-entrypoint-initdb.d
-    command: ["--default-authentication-plugin=mysql_native_password"]
+  backend:
+    build: ./api
+    container_name: backend_app
+    ports:
+      -"5000:5000"
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: Rahul
+      DB_NAME: crud_app
+      JWT_SECRET: devopsSuperSecretKey
+      RESET_ADMIN_PASS: 'true'
+
+  frontend:
+    build: ./client
+    container_name: frontend_app
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
 
 volumes:
   mysql-data:
