@@ -1,5 +1,4 @@
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Rahul';
-FLUSH PRIVILEGES;
+
 CREATE DATABASE IF NOT EXISTS crud_app;
 USE crud_app;
 CREATE TABLE IF NOT EXISTS users (
