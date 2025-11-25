@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'dev', url: 'https://github.com/Rahuldubey2629/DevSecOps-Learning.git'
+                git branch: 'docker-build-deploy', url: 'https://github.com/Rahuldubey2629/DevSecOps-Learning.git'
             }
         }
         
